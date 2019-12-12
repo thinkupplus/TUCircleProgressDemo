@@ -6,11 +6,13 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.SweepGradient;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -23,6 +25,8 @@ public class ArcProgress extends View {
     protected Paint textPaint;
 
     private RectF rectF = new RectF();
+
+    private SweepGradient   gradient;
 
     private float strokeWidth;
     private float suffixTextSize;
@@ -123,6 +127,13 @@ public class ArcProgress extends View {
         paint.setStrokeWidth(strokeWidth);
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeCap(Paint.Cap.ROUND);
+
+        int[] colors = {Color.RED, Color.YELLOW, Color.BLUE};
+        float[] positions = {0.1f, 0.5f, 1.0f};
+        //float[] positions = {0, 288};
+        //gradient = new SweepGradient(0, getMeasuredHeight()/2, colors, positions);
+
+        gradient = new SweepGradient(getMeasuredWidth()/2, getMeasuredHeight()/2, colors, positions);
     }
 
     @Override
@@ -276,14 +287,23 @@ public class ArcProgress extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+
         float startAngle = 270 - arcAngle / 2f;
         float finishedSweepAngle = progress / (float) getMax() * arcAngle;
         float finishedStartAngle = startAngle;
         if(progress == 0) finishedStartAngle = 0.01f;
         paint.setColor(unfinishedStrokeColor);
         canvas.drawArc(rectF, startAngle, arcAngle, false, paint);
-        paint.setColor(finishedStrokeColor);
+//        paint.setColor(finishedStrokeColor);
+
+        paint.setShader(gradient);
         canvas.drawArc(rectF, finishedStartAngle, finishedSweepAngle, false, paint);
+
+        Log.d("ArcProgress", "onDraw: startAngle = " + startAngle);
+        Log.d("ArcProgress", "onDraw: finishedStartAngle = " + finishedStartAngle);
+
+        Log.d("ArcProgress", "onDraw: arcAngle = " + arcAngle);
+        Log.d("ArcProgress", "onDraw: finishedSweepAngle = " + finishedSweepAngle);
 
         String text = String.valueOf(getProgress());
         if (!TextUtils.isEmpty(text)) {
