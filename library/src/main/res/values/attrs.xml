@@ -67,4 +67,21 @@
         <attr name="donutProgressStyle" format="reference"/>
         <attr name="arcProgressStyle" format="reference"/>
     </declare-styleable>
+
+    <declare-styleable name="ArcSeekBar">
+        <attr name="startAngleDegrees" format="float" />
+        <attr name="thumbRadius" format="dimension" />
+        <attr name="thumbDrawable" format="reference" />
+        <attr name="showThumb" format="boolean" />
+        <attr name="thumbColor" format="color" />
+        <attr name="trackGradient" format="color" />
+        <attr name="showProgress" format="boolean" />
+        <attr name="trackGradientPositions" format="reference" />
+        <attr name="progress" format="float" />
+        <attr name="interactive" format="boolean" />
+        <attr name="trackWidth" format="dimension" />
+        <attr name="progressWidth" format="dimension" />
+        <attr name="progressGradient" format="reference" />
+        <attr name="progressGradientPositions" format="reference" />
+    </declare-styleable>
 </resources>

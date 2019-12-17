@@ -19,6 +19,10 @@
     <color name="very_light_pink_two">#ebe9e9</color>
     <color name="aju_gray">#979797</color>
 
+    <color name="start">#ffff00</color>
+    <color name="end">#455a64</color>
+    <color name="centre">#ff5722</color>
+
     <array name="progressRainbow">
         <item>@android:color/holo_blue_light</item>
         <item>@android:color/holo_red_light</item>
